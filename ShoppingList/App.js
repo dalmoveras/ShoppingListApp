@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {View, StyleSheet, FlatList, Alert} from 'react-native';
 import Header from './components/Header.component';
 import ListItem from './components/ListItem.component';
 import AddItem from './components/AddItem.component';
 const App = () => {
+  const generateId = () => Math.floor(Math.random() * 100 + 1);
   const [items, setItems] = useState([
-    {id: 1, text: 'Laranja'},
-    {id: 2, text: 'Morango'},
-    {id: 3, text: 'Leite'},
-    {id: 4, text: 'Bolacha'},
-    {id: 5, text: 'Cafe'},
+    {id: generateId(), text: 'Laranja'},
+    {id: generateId(), text: 'Morango'},
+    {id: generateId(), text: 'Leite'},
+    {id: generateId(), text: 'Bolacha'},
+    {id: generateId(), text: 'Cafe'},
   ]);
 
   const deleteItem = id => {
@@ -17,10 +18,20 @@ const App = () => {
       return previousItems.filter(item => item.id !== id);
     });
   };
+
+  const addItem = text => {
+    if (!text) {
+      Alert.alert('Oops', 'Por favor, digite alguma coisa');
+    } else {
+      setItems(previousItems => {
+        return [{id: generateId(), text}, ...previousItems];
+      });
+    }
+  };
   return (
     <View style={styles.container}>
       <Header />
-      <AddItem />
+      <AddItem addItem={addItem} />
       <FlatList
         data={items}
         renderItem={({item}) => (
