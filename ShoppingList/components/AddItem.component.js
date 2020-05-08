@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import Icon from 'react-native-vector-icons';
+import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
 // import { Container } from './styles';
 
@@ -15,7 +15,7 @@ const AddItem = () => {
     <View>
       <TextInput placeholder="Add item..." style={styles.textInput} />
       <TouchableOpacity style={styles.touchButton}>
-        <Text styles={styles.touchButtonText}>
+        <Text style={styles.touchButtonText}>
           <Icon name="plus" size={20} />
           Add Item
         </Text>
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   touchButtonText: {
     color: 'darkslateblue',
     fontSize: 20,
-    textAlign: 'center',
+    alignSelf: 'center',
   },
 });
 export default AddItem;
