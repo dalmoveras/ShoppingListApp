@@ -10,12 +10,21 @@ const App = () => {
     {id: 4, text: 'Bolacha'},
     {id: 5, text: 'Cafe'},
   ]);
+
+  const deleteItem = id => {
+    setItems(previousItems => {
+      return previousItems.filter(item => item.id !== id);
+    });
+  };
   return (
     <View style={styles.container}>
       <Header />
       <FlatList
         data={items}
-        renderItem={({item}) => <ListItem item={item} />}
+        renderItem={({item}) => (
+          <ListItem item={item} deleteItem={deleteItem} />
+        )}
+        keyExtractor={item => item.id}
       />
     </View>
   );
